@@ -1,0 +1,32 @@
+{
+  "run_id": "AI4S-BG-V2.1",
+  "model": "Qwen3-4B-Instruct-2507-Q4_K_M",
+  "model_repository": "unsloth/Qwen3-4B-Instruct-2507-GGUF",
+  "model_revision": "a06e946bb6b655725eafa393f4a9745d460374c9",
+  "model_sha256": "3605803b982cb64aead44f6c1b2ae36e3acdb41d8e46c8a94c6533bc4c67e597",
+  "inference_engine": "llama.cpp b6500 (a7a98e0f), Windows x64 Vulkan",
+  "gpu": "NVIDIA GeForce RTX 3050 Laptop GPU",
+  "hardware_flags": {
+    "context": 6144,
+    "threads": 8,
+    "gpu_layers": 99,
+    "design_slots": 4,
+    "evaluation_slots": 2
+  },
+  "data_doi": "10.5281/zenodo.15124019",
+  "data_license": "CC BY 4.0",
+  "raw_csv_sha256": "e187209dd9de14ca10b9c18da9461f4b065bdfe61f342084877f058a8d8e3606",
+  "diagnostic_data_sha256": "4aea6da66ad7d2a0ce10fded223dbadd5967660e967a6f92bc347ecf7270569b",
+  "confirmation_data_sha256": "aeabe1c6546a9842d98bb3e07ac9a65acdcd1390df765d092cfd358d2973bdfd",
+  "diagnostic_seed": 20261111,
+  "confirmation_seed": 20261116,
+  "manual_prompt_publication": "10.1038/s43246-025-00979-w",
+  "design_and_evaluation": "Prompt candidates frozen from 15 development cases. Diagnostic model calls are archived and reprocessed under the common verifier. All five groups are run on a separate 30-case confirmation split after the verifier is frozen.",
+  "interactive_rehearsal_source": "10.1038/s41467-019-11751-3",
+  "reproducibility": "Eight independently repeated diagnostic calls. Both raw replies and verified records agreed.",
+  "expert_human_ratings": {
+    "status": "awaiting independent ratings",
+    "planned_primary_outputs": 30,
+    "received": 0
+  }
+}

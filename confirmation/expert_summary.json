@@ -1,0 +1,41 @@
+{
+  "groups": {
+    "manual": {
+      "n_rated_outputs": 0,
+      "n_ratings": 0,
+      "mean_1_5": null,
+      "priority_n": 0,
+      "priority_mean_1_5": null
+    },
+    "direct": {
+      "n_rated_outputs": 0,
+      "n_ratings": 0,
+      "mean_1_5": null,
+      "priority_n": 0,
+      "priority_mean_1_5": null
+    },
+    "auto": {
+      "n_rated_outputs": 0,
+      "n_ratings": 0,
+      "mean_1_5": null,
+      "priority_n": 0,
+      "priority_mean_1_5": null
+    },
+    "no_knowledge": {
+      "n_rated_outputs": 0,
+      "n_ratings": 0,
+      "mean_1_5": null,
+      "priority_n": 0,
+      "priority_mean_1_5": null
+    },
+    "no_loop": {
+      "n_rated_outputs": 0,
+      "n_ratings": 0,
+      "mean_1_5": null,
+      "priority_n": 0,
+      "priority_mean_1_5": null
+    }
+  },
+  "declared_reviewers": {},
+  "priority_complete": false
+}

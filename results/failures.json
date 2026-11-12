@@ -1,0 +1,151 @@
+[
+  {
+    "case_no": "F01",
+    "id": "T08",
+    "variant": "auto",
+    "label": "完整方案",
+    "name": "功函数与带隙混淆",
+    "source": "http://arxiv.org/abs/1907.13618v1",
+    "pv_id": "MAPI_http:----arxiv.org--abs--1907.13618v1_187",
+    "target": "MAPbI3",
+    "evidence_sentence": 4,
+    "evidence_text": "(For the work function (4.2 eV for TiO2 and 4.9 eV for MAPI) and bandgap values we refer to 28,38-40) So far we have concluded that the built-in space charge on the MAPI side is ionically dominated [see Fig. 4(a)] when in contact with Al2O3 and TiO2.",
+    "context": "第 4 句把 4.2 eV 和 4.9 eV 分别给 TiO₂ 与 MAPI 的功函数，带隙值只指向文献引用。",
+    "raw": "{\"g1\":\"ref\",\"g2\":\"ref\"}",
+    "gold": "[]",
+    "final": "[[4.2,\"eV\",\"unk\",4],[4.9,\"eV\",\"unk\",4]]",
+    "audit": [
+      "origin_unresolved",
+      "origin_unresolved"
+    ],
+    "effect": "模型选择两个功函数。4.9 eV 同时满足目标材料、单位和量级，仍属于另一物理量。",
+    "fix": "明确检查能量名词的局部归属。文献只提及带隙且无数值时弃权。"
+  },
+  {
+    "case_no": "F02",
+    "id": "T12",
+    "variant": "auto",
+    "label": "完整方案",
+    "name": "激发能误作带隙",
+    "source": "http://arxiv.org/abs/2107.06809v1",
+    "pv_id": "CsPbBr3_http:----arxiv.org--abs--2107.06809v1_543",
+    "target": "CsPbBr3",
+    "evidence_sentence": 1,
+    "evidence_text": "Fig. 4(A) shows the μPL spectra from CsPbBr3 PNCs illuminated at increasing excitation powers with an off-resonant pulse with an excitation energy of 2.505 eV (495 nm).",
+    "context": "第 1 句中的 2.505 eV 属于对 CsPbBr₃ 纳米晶的非共振激发脉冲。",
+    "raw": "{\"g1\":\"ref\"}",
+    "gold": "[]",
+    "final": "[[2.505,\"eV\",\"unk\",1]]",
+    "audit": [
+      "origin_unresolved"
+    ],
+    "effect": "输出把光谱实验的输入能量归档为材料属性。仅见到光谱、材料和 eV 无法完成判断。",
+    "fix": "在术语表和验证规则中细分激发能、发射峰与带隙观测。"
+  },
+  {
+    "case_no": "F03",
+    "id": "T15",
+    "variant": "auto",
+    "label": "完整方案",
+    "name": "跨句方法与补充引用",
+    "source": "10.1038/s41467-022-30701-0",
+    "pv_id": "CsPbI3_10.1038--s41467-022-30701-0_621",
+    "target": "CsPbI3",
+    "evidence_sentence": 3,
+    "evidence_text": "Note that for cubic CsPbI3 with the lattice constant 6.289  ̊A, this approach gives the bandgap Eg = 1.366 eV, while the experimental value is Eg = 1.65 eV [S11].",
+    "context": "第 3 句把本文方法所得 1.366 eV 与补充引用 S11 的 1.65 eV 实验值并列。",
+    "raw": "{\"g1\":\"calc\",\"g2\":\"exp\"}",
+    "gold": "[[1.366,\"eV\",\"calc\",3],[1.65,\"eV\",\"ref\",3]]",
+    "final": "[[1.366,\"eV\",\"unk\",3],[1.65,\"eV\",\"unk\",3]]",
+    "audit": [
+      "origin_unresolved",
+      "origin_unresolved"
+    ],
+    "effect": "来源规则未把 this approach 关联前文，也未识别 S11。两个数值均对，最终来源均为 unk。",
+    "fix": "解析补充材料引文并对前文方法做局部指代消解。"
+  },
+  {
+    "case_no": "F04",
+    "id": "T27",
+    "variant": "auto",
+    "label": "完整方案",
+    "name": "实验谱计算被误标",
+    "source": "10.1016/j.isci.2018.08.021",
+    "pv_id": "MAPB_10.1016--j.isci.2018.08.021_60",
+    "target": "MAPbBr3",
+    "evidence_sentence": 5,
+    "evidence_text": "The strong PL peak locates at 545 nm, and the corresponding optical bandgap can be calculated as 2.2 eV, which matches well with the reported single-crystal MAPB ().To investigate the position response of the device, we built a custom-designed optoelectronic test platform to provide a focused laser beam with intensity ranging from 0.13 to 22 μW (see  section for more details).",
+    "context": "第 5 句先给 PL 峰位置，再由该谱结果得到 2.2 eV 光学带隙。",
+    "raw": "{\"g1\":\"calc\"}",
+    "gold": "[[2.2,\"eV\",\"exp\",5]]",
+    "final": "[[2.2,\"eV\",\"calc\",5]]",
+    "audit": [
+      "local_computational_cue"
+    ],
+    "effect": "calculated 触发 calc，掩盖该数值来自实验谱的事实。结果会被误放入理论计算组。",
+    "fix": "让光谱证据优先于单独的 calculated 字样，并保留方法来源审核记录。"
+  },
+  {
+    "case_no": "F05",
+    "id": "T28",
+    "variant": "auto",
+    "label": "完整方案",
+    "name": "设计目标规则误拒",
+    "source": "10.1039/d1sc04769h",
+    "pv_id": "FAPI_10.1039--d1sc04769h_520",
+    "target": "FAPbI3",
+    "evidence_sentence": 1,
+    "evidence_text": "FAPI (FAPI) perovskites are considered to exhibit higher thermal stability and a more ideal bandgap of 1.48 eV.",
+    "context": "第 1 句称 FAPI 已具有较理想的 1.48 eV 带隙。语义是属性陈述。",
+    "raw": "{\"g1\":\"ref\"}",
+    "gold": "[[1.48,\"eV\",\"unk\",1]]",
+    "final": "[]",
+    "audit": [
+      "target_design_value"
+    ],
+    "effect": "模型找到正确数值位置，校验器把 ideal 当成设计目标拒绝，造成漏报。",
+    "fix": "区分已有属性与尚待达到的目标，保留可定位的正例作为回归用例。"
+  },
+  {
+    "case_no": "F06",
+    "id": "T09",
+    "variant": "auto",
+    "label": "完整方案",
+    "name": "相对差值误作绝对值",
+    "source": "10.1103/physrevb.94.195309",
+    "pv_id": "MAPB_10.1103--physrevb.94.195309_44",
+    "target": "MAPbBr3",
+    "evidence_sentence": 2,
+    "evidence_text": "Fora uniformly polarized bulk MAPB crystal, the bandgap appears to be about 0.27 eV larger than that for a nonpolarMAPB crystal.",
+    "context": "第 2 句的 0.27 eV 是极化与非极化 MAPbBr₃ 的带隙差。",
+    "raw": "{\"g1\":\"unk\"}",
+    "gold": "[]",
+    "final": "[[0.27,\"eV\",\"unk\",2]]",
+    "audit": [
+      "origin_unresolved"
+    ],
+    "effect": "相对比较被写为绝对带隙。数值可落入 0–15 eV，但量的语义不同。",
+    "fix": "检查 larger than 等位于数值之后的比较结构。"
+  },
+  {
+    "case_no": "F07",
+    "id": "T34",
+    "variant": "auto",
+    "label": "完整方案",
+    "name": "收敛容差误作性质",
+    "source": "10.1021/acs.chemmater.0c02345",
+    "pv_id": "CsPbBr3_10.1021--acs.chemmater.0c02345_541",
+    "target": "CsPbBr3",
+    "evidence_sentence": 5,
+    "evidence_text": "We note that tests of the computational setupemployed within VASP (cutoff energy of 300 eV and Γ-point sampling) showed that the SOC effects on the energylevels of excess electrons are converged within 0.001 eV.",
+    "context": "第 5 句说明 SOC 相关能级计算收敛在 0.001 eV 内。",
+    "raw": "{\"g4\":\"calc\"}",
+    "gold": "[]",
+    "final": "[[0.001,\"eV\",\"unk\",5]]",
+    "audit": [
+      "origin_unresolved"
+    ],
+    "effect": "模型选中了数值精度参数，输出与论文材料观测无关。",
+    "fix": "识别 converged within 等方法质量表达，并把数值从属性候选移除。"
+  }
+]

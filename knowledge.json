@@ -1,0 +1,298 @@
+{
+  "glossary": {
+    "BG": "absolute band gap of a material in a stated context",
+    "OPT": "optical gap inferred from evidence such as an absorption/Tauc measurement",
+    "ELEC": "electronic or quasiparticle gap; keep method and sample aligned",
+    "PL": "photoluminescence; an emission energy alone does not establish a band gap",
+    "DFT": "density functional theory; PBE and HSE are common calculation cues",
+    "GW": "quasiparticle calculation",
+    "Tauc": "analysis of optical measurements; it may be described as 'calculated'",
+    "CITE": "a numerical value attributed to earlier work, including a cited experiment",
+    "UNK": "origin not explicitly supported in the supplied passage",
+    "SAMPLE": "specific composition, phase, thickness, substrate and condition",
+    "EN": "energy quantities with stated eV, meV or J",
+    "OTHER": "binding energy, barrier, Fermi level, offset, shift, or wavelength-only statement"
+  },
+  "ontology": [
+    [
+      "material",
+      "has_sample",
+      "sample"
+    ],
+    [
+      "sample",
+      "has_observation",
+      "BG"
+    ],
+    [
+      "OPT",
+      "is_a",
+      "BG"
+    ],
+    [
+      "ELEC",
+      "is_a",
+      "BG"
+    ],
+    [
+      "BG",
+      "has_value",
+      "EN"
+    ],
+    [
+      "BG",
+      "has_origin",
+      "exp|calc|ref|unk"
+    ],
+    [
+      "BG",
+      "supported_by",
+      "evidence_span"
+    ],
+    [
+      "Tauc",
+      "indicates",
+      "exp_if_in_house"
+    ],
+    [
+      "DFT",
+      "indicates",
+      "calc_if_in_house"
+    ],
+    [
+      "GW",
+      "indicates",
+      "calc_if_in_house"
+    ],
+    [
+      "CITE",
+      "maps_to",
+      "ref"
+    ],
+    [
+      "OTHER",
+      "excluded_from",
+      "BG"
+    ]
+  ],
+  "cards": [
+    {
+      "id": "K01",
+      "terms": [
+        "BG",
+        "SAMPLE"
+      ],
+      "keys": [
+        "respectively",
+        "compared",
+        "comparison",
+        "control",
+        "and",
+        "than",
+        "range"
+      ],
+      "weight": 1,
+      "rule": "First bind each tag to its named composition. In a parallel list with respectively, pair materials and tags in order. Neighbor values belong to their own composition.",
+      "example": {
+        "target": "CdS",
+        "passage": "The calculated gaps of CdS and ZnS are 2.4 eV [g1] and 3.5 eV [g2], respectively.",
+        "answer": {
+          "g1": "calc"
+        }
+      }
+    },
+    {
+      "id": "K02",
+      "terms": [
+        "CITE",
+        "UNK"
+      ],
+      "keys": [
+        "previously",
+        "reported",
+        "reported by",
+        "the authors",
+        "compared with",
+        "literature",
+        "reference",
+        "experimentally reported",
+        "in agreement"
+      ],
+      "weight": 1.35,
+      "rule": "If a clause attributes its tag to another article, label it ref even when the cited result is experimental. Cite context or an explicit comparator belongs to its own tag. A background citation does not relabel an in-house result.",
+      "example": {
+        "target": "CdTe",
+        "passage": "We obtained 1.52 eV [g1] for CdTe. The literature value is 1.48 eV [g2] (Ref. 7).",
+        "answer": {
+          "g1": "exp",
+          "g2": "ref"
+        }
+      }
+    },
+    {
+      "id": "K03",
+      "terms": [
+        "Tauc",
+        "PL",
+        "DFT",
+        "GW"
+      ],
+      "keys": [
+        "measured",
+        "calculated",
+        "absorption",
+        "tauc",
+        "dft",
+        "pbe",
+        "hse",
+        "gw",
+        "spectra",
+        "fitted",
+        "measurement"
+      ],
+      "weight": 1.05,
+      "rule": "A Tauc fit to this article's measured absorption is exp. DFT or GW performed in this article is calc. Do not infer the provenance of an unqualified gap.",
+      "example": {
+        "target": "ZnO",
+        "passage": "From our measured absorption we calculated a ZnO Tauc gap of 3.26 eV [g1]. Our HSE calculation gave 3.41 eV [g2].",
+        "answer": {
+          "g1": "exp",
+          "g2": "calc"
+        }
+      }
+    },
+    {
+      "id": "K04",
+      "terms": [
+        "OPT",
+        "ELEC",
+        "OTHER"
+      ],
+      "keys": [
+        "binding",
+        "binding energy",
+        "fermi",
+        "conduction",
+        "valence",
+        "offset",
+        "exciton",
+        "shift",
+        "blue shift",
+        "activation",
+        "wavelength",
+        "nm"
+      ],
+      "weight": 1.1,
+      "rule": "An absolute gap is distinct from band-edge positions, binding energies, activation energies, shifts and spectral peak energies. A value in eV alone is insufficient.",
+      "example": {
+        "target": "MoSe2",
+        "passage": "Our STS measurement gives an electronic gap of 2.18 eV [g1] in MoSe2. An excitonic feature lies at 1.63 eV [g2].",
+        "answer": {
+          "g1": "exp"
+        }
+      }
+    },
+    {
+      "id": "K05",
+      "terms": [
+        "SAMPLE"
+      ],
+      "keys": [
+        "film",
+        "phase",
+        "bulk",
+        "alloy",
+        "doped",
+        "undoped",
+        "layer",
+        "compositions",
+        "crystal",
+        "strain",
+        "thickness",
+        "shell",
+        "mixed"
+      ],
+      "weight": 1.05,
+      "rule": "Do not treat a mixed composition, doped sample or another phase as the queried material without an explicit relation. A phase qualifier may stay in the evidence for the target if the formula matches.",
+      "example": {
+        "target": "InP",
+        "passage": "The InP core has a gap of 1.35 eV [g1]; its InGaP shell has a gap of 1.86 eV [g2].",
+        "answer": {
+          "g1": "unk"
+        }
+      }
+    },
+    {
+      "id": "K06",
+      "terms": [
+        "EN",
+        "BG"
+      ],
+      "keys": [
+        "mev",
+        "between",
+        "varies",
+        "interval",
+        "uncertainty",
+        "upper limit",
+        "lower limit",
+        "in the range",
+        "range"
+      ],
+      "weight": 1.15,
+      "rule": "Retain the exact tag carrying an energy unit. Never convert the number in the response. A stated central value with uncertainty is eligible. A range, bound or absent unit has no eligible scalar.",
+      "example": {
+        "target": "GaN",
+        "passage": "Our absorption-derived gap of GaN is 3420 ± 20 meV [g1]. The literature gives only a range of 3.3 to 3.5 eV.",
+        "answer": {
+          "g1": "exp"
+        }
+      }
+    },
+    {
+      "id": "K07",
+      "terms": [
+        "UNK",
+        "CITE"
+      ],
+      "keys": [
+        "exhibits",
+        "has a bandgap",
+        "has a band gap",
+        "with a bandgap",
+        "with a band gap",
+        "gap of",
+        "is a semiconductor",
+        "around"
+      ],
+      "weight": 0.8,
+      "rule": "Use unk for a clearly stated target gap without explicit measurement, calculation or citation attribution for that observation. Being in a methods-heavy paragraph does not prove the value's origin.",
+      "example": {
+        "target": "GaSb",
+        "passage": "GaSb is a direct-gap semiconductor with a gap of 0.73 eV [g1].",
+        "answer": {
+          "g1": "unk"
+        }
+      }
+    },
+    {
+      "id": "K08",
+      "terms": [
+        "BG",
+        "SAMPLE"
+      ],
+      "keys": [
+        "evidence absent",
+        "not identified",
+        "no scalar"
+      ],
+      "weight": 0,
+      "rule": "If neither the energy nor target-material relation is supported, return the empty object.",
+      "example": {
+        "target": "AlN",
+        "passage": "The measured absorption spectrum was obtained at 300 K. The GaN band gap is 3.42 eV [g1].",
+        "answer": {}
+      }
+    }
+  ]
+}

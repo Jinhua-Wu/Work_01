@@ -1,0 +1,125 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Band gap extraction task contract",
+  "version": "2.0",
+  "input": {
+    "type": "object",
+    "required": [
+      "material",
+      "sentences"
+    ],
+    "properties": {
+      "id": {
+        "type": "string"
+      },
+      "material": {
+        "type": "string",
+        "minLength": 1
+      },
+      "pv_alias": {
+        "type": "string"
+      },
+      "source": {
+        "type": "string"
+      },
+      "sentences": {
+        "type": "array",
+        "minItems": 1,
+        "items": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    }
+  },
+  "model_response": {
+    "type": "object",
+    "propertyNames": {
+      "pattern": "^g[1-9][0-9]*$"
+    },
+    "additionalProperties": {
+      "enum": [
+        "exp",
+        "calc",
+        "ref",
+        "unk"
+      ]
+    },
+    "description": "Keys are displayed evidence IDs. Empty object means abstention."
+  },
+  "response": {
+    "type": "array",
+    "items": {
+      "type": "array",
+      "prefixItems": [
+        {
+          "type": "number"
+        },
+        {
+          "enum": [
+            "eV",
+            "meV",
+            "J"
+          ]
+        },
+        {
+          "enum": [
+            "exp",
+            "calc",
+            "ref",
+            "unk"
+          ]
+        },
+        {
+          "type": "integer",
+          "minimum": 1
+        }
+      ],
+      "minItems": 4,
+      "maxItems": 4,
+      "items": false
+    },
+    "description": "Public observation tuples [original value, original unit, origin, evidence sentence]. Empty list means no supported observation."
+  },
+  "method": {
+    "exp": "this paper's experimental measurement or experimental fit",
+    "calc": "this paper's calculated value",
+    "ref": "value attributed to prior work",
+    "unk": "origin unresolved"
+  },
+  "archive": {
+    "required": [
+      "material",
+      "band_gap",
+      "unit",
+      "band_gap_eV",
+      "method",
+      "sentence",
+      "evidence",
+      "source",
+      "span"
+    ],
+    "optional": [
+      "mention",
+      "method_cues",
+      "gap_kind_cue"
+    ],
+    "description": "Method detail and gap type are explicit evidence cues, not inferred labels."
+  },
+  "rules": [
+    "A value requires a named energy unit and traceable evidence for the target and sample.",
+    "Reject wavelength-only claims, missing units, range or bound endpoints and non-gap energy cues.",
+    "Capture a stated center for x ± u; retain the original numeric spelling and entire evidence span.",
+    "Normalization is deterministic; unit family is energy; 0–15 eV inclusive is a screening range."
+  ],
+  "validation": {
+    "J_per_eV": 1.602176634e-19,
+    "eV_range_inclusive": [
+      0,
+      15
+    ],
+    "tolerance_eV": 0.01,
+    "reference": "Same source and same anchored passage, with unit, method and evidence sentence matched to the published annotation.",
+    "replay": "Same frozen input, policy, engine, decoding configuration; recheck schema and compare outputs."
+  }
+}
